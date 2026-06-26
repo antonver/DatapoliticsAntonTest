@@ -138,7 +138,11 @@ So about my thoughts, and my approach:
 - **Improve text extraction** — strip page headers/footers and normalise whitespace before chunking.
 
 ### What I would add for a production-ready version
-
+- I would use Reranker model to give more relevant chunks
+- Of course I will add AI connection in the end to make the real RAG, but it leads to addition checks of AI output.
+- Also I could add the restrictions(only prime users have access to this folder so serch will be made only in focused scope)
+- Also we could add caching by using Redis or MemCached if requests are the same to reduce load
+- And of cours we should add some logging
 - **Per-document filtering** — let the client pass `document_name` to restrict search to a specific file.
 - **Persistent vector database** — replace flat-file FAISS with a proper vector DB (Qdrant, Weaviate, pgvector) to support concurrent writes, filtering, and scalable retrieval.
 - **Authentication** — API key or OAuth2 middleware before exposing `/search` externally.
