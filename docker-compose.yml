@@ -1,0 +1,27 @@
+services:
+
+  ingest:
+    build: .
+    volumes:
+      - ${PDF_DIR}:/app/pdf
+      - ./storage:/app/storage
+      - hf_cache:/app/.cache/huggingface
+    environment:
+      - STORAGE=/app/storage
+    command: sh -c 'cd /app/ingestion_app && python main.py /app/pdf'
+
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage:/app/storage
+      - hf_cache:/app/.cache/huggingface
+    environment:
+      - STORAGE=/app/storage
+    depends_on:
+      ingest:
+        condition: service_completed_successfully
+
+volumes:
+  hf_cache:

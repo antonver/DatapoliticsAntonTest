@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Environment
+.env
+
+# Generated index
+storage/
+ingestion_app/storage/
+
+# HuggingFace cache (local runs)
+.cache/
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
